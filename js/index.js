@@ -101,6 +101,28 @@ function renderButtons() {
 
 function renderPrice() {
   // Iteration 4: change the HTML of `<aside class="panel price">`
+  let totalPrice = basePrice;
+  let priceIngredientLi = "";
+
+  for (const ingredient in ingredients) {
+    if (state[ingredient]) {
+      priceIngredientLi += `
+        <li>$ ${ingredients[ingredient].price} ${ingredients[ingredient].name}</li>
+      `;
+      totalPrice += ingredients[ingredient].price;
+    }
+  }
+
+  const pricePanelHTML = `
+    <h2>Your Pizza's price</h2>
+    <b>${basePrice} cheese pizza</b>
+    <ul>
+      ${priceIngredientLi}
+    </ul>
+    <strong>${totalPrice}</strong>
+  `;
+
+  document.querySelector(".panel.price").innerHTML = pricePanelHTML;
 }
 
 renderEverything();
